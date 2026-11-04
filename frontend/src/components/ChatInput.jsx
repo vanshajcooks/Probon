@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Paperclip, Smile, AtSign, Send } from "lucide-react";
 
 function ChatInput({ onSend }) {
   const [message, setMessage] = useState("");
@@ -27,13 +28,12 @@ function ChatInput({ onSend }) {
       className="message-input-wrapper"
       onSubmit={handleSubmit}
     >
-
       <button
         type="button"
         className="input-tool"
         title="Attach file"
       >
-        📎
+        <Paperclip size={16} />
       </button>
 
       <button
@@ -41,7 +41,7 @@ function ChatInput({ onSend }) {
         className="input-tool"
         title="Add emoji"
       >
-        😊
+        <Smile size={16} />
       </button>
 
       <textarea
@@ -59,7 +59,7 @@ function ChatInput({ onSend }) {
         className="input-tool"
         title="Mention someone"
       >
-        @
+        <AtSign size={16} />
       </button>
 
       <button
@@ -67,9 +67,8 @@ function ChatInput({ onSend }) {
         className="send-button"
         disabled={!message.trim()}
       >
-        ➤
+        <Send size={15} />
       </button>
-
     </form>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "../components/sidebar";
 import Taskcard from "../components/Taskcard";
 import { api } from "../api/client";
+import { CheckSquare, Plus, User, Globe, X } from "lucide-react";
 
 function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -124,7 +125,7 @@ function Tasks() {
       <main className="dashboard-main">
         <header className="dashboard-topbar">
           <div className="breadcrumb">
-            <span>ProjectHub</span>
+            <span>ProjNaN</span>
             <span>›</span>
             <span>My Tasks</span>
           </div>
@@ -133,8 +134,9 @@ function Tasks() {
             <button
               className="create-project-button"
               onClick={() => setShowCreateModal(true)}
+              style={{ display: "flex", alignItems: "center", gap: "6px" }}
             >
-              + Create Task
+              <Plus size={15} /> Create Task
             </button>
           </div>
         </header>
@@ -143,8 +145,8 @@ function Tasks() {
           <section className="welcome-section" style={{ marginBottom: "24px" }}>
             <div>
               <div className="welcome-label">TASK MANAGEMENT</div>
-              <h1>
-                Your Tasks <span>✓</span>
+              <h1 style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                Your Tasks <CheckSquare size={22} color="#a78bfa" />
               </h1>
               <p className="welcome-description">
                 Track your active assignments, daily goals, and submit completion evidence for verification.
@@ -157,6 +159,9 @@ function Tasks() {
             <button
               onClick={() => setScope("my")}
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
                 padding: "6px 14px",
                 borderRadius: "6px",
                 border: scope === "my" ? "1px solid #a855f7" : "1px solid #27272a",
@@ -168,11 +173,14 @@ function Tasks() {
                 transition: "all 0.15s ease",
               }}
             >
-              👤 My Tasks
+              <User size={13} /> My Tasks
             </button>
             <button
               onClick={() => setScope("all")}
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
                 padding: "6px 14px",
                 borderRadius: "6px",
                 border: scope === "all" ? "1px solid #a855f7" : "1px solid #27272a",
@@ -184,7 +192,7 @@ function Tasks() {
                 transition: "all 0.15s ease",
               }}
             >
-              🌐 All Project Tasks
+              <Globe size={13} /> All Project Tasks
             </button>
           </div>
 
@@ -291,9 +299,9 @@ function Tasks() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Submit Task Evidence</h2>
               <button
                 onClick={() => setEvidenceTask(null)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -368,9 +376,9 @@ function Tasks() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Create New Task</h2>
               <button
                 onClick={() => setShowCreateModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 

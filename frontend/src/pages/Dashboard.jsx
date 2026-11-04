@@ -1,5 +1,24 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  Settings,
+  Plus,
+  Mail,
+  Sparkles,
+  Zap,
+  Trophy,
+  FolderKanban,
+  TrendingUp,
+  Users,
+  UserCheck,
+  FolderGit2,
+  Copy,
+  Check,
+  X,
+  GitCommit,
+  ArrowRight,
+} from "lucide-react";
+import Sidebar from "../components/sidebar";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../api/client";
 import "./Dashboard.css";
@@ -295,119 +314,14 @@ function Dashboard() {
 
   return (
     <div className="dashboard-page">
-      {/* SIDEBAR */}
-      <aside className="dashboard-sidebar">
-        <div className="dashboard-logo">
-          Project<span>Hub</span>
-        </div>
-
-        <nav className="dashboard-nav">
-          <div className="dashboard-nav-title">WORKSPACE</div>
-
-          <button className="dashboard-nav-item active">
-            <span className="dashboard-nav-icon">⌂</span>
-            <span>Dashboard</span>
-          </button>
-
-          <button
-            className="dashboard-nav-item"
-            onClick={() => navigate("/projects")}
-          >
-            <span className="dashboard-nav-icon">◇</span>
-            <span>Explore Projects</span>
-          </button>
-
-          <button
-            className="dashboard-nav-item"
-            onClick={() => navigate("/tasks")}
-          >
-            <span className="dashboard-nav-icon">✓</span>
-            <span>My Tasks</span>
-          </button>
-
-          <button
-            className="dashboard-nav-item"
-            onClick={() => navigate("/chat")}
-          >
-            <span className="dashboard-nav-icon">💬</span>
-            <span>Group Chat</span>
-          </button>
-
-          <button
-            className="dashboard-nav-item"
-            onClick={() => navigate("/arena")}
-          >
-            <span className="dashboard-nav-icon">⚡</span>
-            <span>Weekly Arena</span>
-          </button>
-
-          <div className="dashboard-nav-title">YOUR PROJECTS</div>
-
-          {projects.length > 0 ? (
-            projects.map((p) => {
-              const initials = p.name
-                .split(" ")
-                .map((w) => w[0])
-                .join("")
-                .substring(0, 2)
-                .toUpperCase();
-              return (
-                <button
-                  key={p.id}
-                  className="dashboard-nav-item"
-                  onClick={() => navigate(`/projects/${p.id}`)}
-                >
-                  <span className="dashboard-nav-icon">{initials}</span>
-                  <span>{p.name}</span>
-                </button>
-              );
-            })
-          ) : (
-            <div style={{ padding: "8px 12px", color: "#555965", fontSize: "11px" }}>
-              No projects yet
-            </div>
-          )}
-        </nav>
-
-        <div className="dashboard-sidebar-bottom">
-          <div
-            className="user-mini"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/profile")}
-          >
-            <div className="user-avatar">{user?.avatar || "U"}</div>
-            <div className="user-mini-info">
-              <strong>{user?.name || "User"}</strong>
-              <span>
-                {user?.role === "teacher" ? "Instructor" : (user?.rank || "Student")} · {user?.xp || 0} XP
-              </span>
-            </div>
-          </div>
-          <button
-            onClick={logout}
-            style={{
-              width: "100%",
-              marginTop: "8px",
-              padding: "7px 10px",
-              border: "1px solid #27272f",
-              borderRadius: "6px",
-              background: "#12131a",
-              color: "#858995",
-              fontSize: "11px",
-              cursor: "pointer",
-            }}
-          >
-            Log Out
-          </button>
-        </div>
-      </aside>
+      <Sidebar projects={projects} />
 
       {/* MAIN */}
       <main className="dashboard-main">
         {/* TOPBAR */}
         <header className="dashboard-topbar">
           <div className="breadcrumb">
-            <span>ProjectHub</span>
+            <span>ProjNaN</span>
             <span>›</span>
             <span>Dashboard</span>
           </div>
@@ -418,14 +332,14 @@ function Dashboard() {
               title={user?.role === "teacher" ? "Create Class" : "Join Class"}
               onClick={() => (user?.role === "teacher" ? setShowCreateClassModal(true) : setShowJoinModal(true))}
             >
-              +
+              <Plus size={16} />
             </button>
             <button
               className="topbar-button"
               title="Profile"
               onClick={() => navigate("/profile")}
             >
-              ⚙
+              <Settings size={16} />
             </button>
             <div
               className="topbar-profile"
@@ -456,7 +370,7 @@ function Dashboard() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#facc15", fontSize: "12px" }}>
-                <span>✉</span>
+                <Mail size={14} />
                 <span>Your email address (<strong>{user.email}</strong>) is not verified yet.</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -479,8 +393,9 @@ function Dashboard() {
           <section className="welcome-section">
             <div>
               <div className="welcome-label">{todayStr}</div>
-              <h1>
-                Welcome back, {user?.name?.split(" ")[0] || "Developer"} <span>👋</span>
+              <h1 style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                <span>Welcome back, {user?.name?.split(" ")[0] || "Developer"}</span>
+                <Sparkles size={22} color="#a78bfa" />
               </h1>
               <p className="welcome-description">
                 {user?.role === "teacher"
@@ -494,23 +409,27 @@ function Dashboard() {
                 <>
                   <button
                     className="secondary-button"
-                    style={{ fontSize: "11px", padding: "10px 14px" }}
+                    style={{ fontSize: "11px", padding: "10px 14px", display: "inline-flex", alignItems: "center", gap: "5px" }}
                     onClick={() => setShowCreateClassModal(true)}
                   >
-                    + Create Class
+                    <Plus size={13} />
+                    <span>Create Class</span>
                   </button>
                   <button
                     className="secondary-button"
-                    style={{ fontSize: "11px", padding: "10px 14px" }}
+                    style={{ fontSize: "11px", padding: "10px 14px", display: "inline-flex", alignItems: "center", gap: "5px" }}
                     onClick={() => setShowCreateTeamModal(true)}
                   >
-                    + Create Team
+                    <Plus size={13} />
+                    <span>Create Team</span>
                   </button>
                   <button
                     className="create-project-button"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}
                     onClick={() => handleOpenCreateProjectModal()}
                   >
-                    + Create Project
+                    <Plus size={13} />
+                    <span>Create Project</span>
                   </button>
                 </>
               ) : (
@@ -524,9 +443,11 @@ function Dashboard() {
                   </button>
                   <button
                     className="create-project-button"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}
                     onClick={() => handleOpenCreateProjectModal()}
                   >
-                    + Create Project
+                    <Plus size={13} />
+                    <span>Create Project</span>
                   </button>
                 </>
               )}
@@ -537,7 +458,9 @@ function Dashboard() {
           <section className="stats-grid">
             <div className="stat-card">
               <div className="stat-top">
-                <span className="stat-icon">⚡</span>
+                <span className="stat-icon">
+                  <Zap size={18} color="#a78bfa" />
+                </span>
                 <span className="stat-change">
                   {stats.weeklyXpText || (stats.weeklyXp > 0 ? `+${stats.weeklyXp} this week` : "0 this week")}
                 </span>
@@ -548,7 +471,9 @@ function Dashboard() {
 
             <div className="stat-card">
               <div className="stat-top">
-                <span className="stat-icon">🏆</span>
+                <span className="stat-icon">
+                  <Trophy size={18} color="#f59e0b" />
+                </span>
                 <span className="stat-change">
                   {stats.weeklyPointsText || (stats.weeklyPoints > 0 ? `+${stats.weeklyPoints} pts this week` : "0 pts this week")}
                 </span>
@@ -559,7 +484,9 @@ function Dashboard() {
 
             <div className="stat-card">
               <div className="stat-top">
-                <span className="stat-icon">◇</span>
+                <span className="stat-icon">
+                  <FolderKanban size={18} color="#60a5fa" />
+                </span>
                 <span className="stat-change">{stats.activeProjectCount ?? projects.length} active</span>
               </div>
               <h3 className="stat-value">{stats.projectCount ?? projects.length}</h3>
@@ -568,7 +495,9 @@ function Dashboard() {
 
             <div className="stat-card">
               <div className="stat-top">
-                <span className="stat-icon">↗</span>
+                <span className="stat-icon">
+                  <TrendingUp size={18} color="#4ade80" />
+                </span>
                 <span className="stat-change">{stats.communityTier || "Active Member"}</span>
               </div>
               <h3 className="stat-value">{stats.communityRank || "#1"}</h3>
@@ -586,10 +515,11 @@ function Dashboard() {
                 </div>
                 <button
                   className="create-project-button"
-                  style={{ fontSize: "11px", padding: "8px 12px" }}
+                  style={{ fontSize: "11px", padding: "8px 12px", display: "inline-flex", alignItems: "center", gap: "5px" }}
                   onClick={() => setShowCreateClassModal(true)}
                 >
-                  + Create New Class
+                  <Plus size={13} />
+                  <span>Create New Class</span>
                 </button>
               </div>
 
@@ -633,15 +563,28 @@ function Dashboard() {
                                 color: copiedCode === cls.code ? "#000" : "#d8b4fe",
                                 border: "none",
                                 borderRadius: "4px",
-                                padding: "2px 6px",
+                                padding: "3px 7px",
                                 fontSize: "9px",
                                 fontWeight: "700",
                                 cursor: "pointer",
                                 transition: "0.2s",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "4px",
                               }}
                               title="Copy join code for students"
                             >
-                              {copiedCode === cls.code ? "✓ Copied" : "📋 Copy"}
+                              {copiedCode === cls.code ? (
+                                <>
+                                  <Check size={11} />
+                                  <span>Copied</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy size={11} />
+                                  <span>Copy</span>
+                                </>
+                              )}
                             </button>
                           </span>
                         </div>
@@ -651,14 +594,17 @@ function Dashboard() {
                         </p>
 
                         <div style={{ display: "flex", gap: "10px", marginBottom: "16px", flexWrap: "wrap" }}>
-                          <div style={{ padding: "6px 10px", borderRadius: "6px", background: "#111218", border: "1px solid #1f2028", fontSize: "10px", color: "#a1a1aa" }}>
-                            👥 <strong style={{ color: "#e4e4e7" }}>{cls.student_count ?? 0}</strong> Students
+                          <div style={{ padding: "6px 10px", borderRadius: "6px", background: "#111218", border: "1px solid #1f2028", fontSize: "10px", color: "#a1a1aa", display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                            <Users size={12} color="#a78bfa" />
+                            <span><strong style={{ color: "#e4e4e7" }}>{cls.student_count ?? 0}</strong> Students</span>
                           </div>
-                          <div style={{ padding: "6px 10px", borderRadius: "6px", background: "#111218", border: "1px solid #1f2028", fontSize: "10px", color: "#a1a1aa" }}>
-                            🤝 <strong style={{ color: "#e4e4e7" }}>{cls.team_count ?? 0}</strong> Teams
+                          <div style={{ padding: "6px 10px", borderRadius: "6px", background: "#111218", border: "1px solid #1f2028", fontSize: "10px", color: "#a1a1aa", display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                            <UserCheck size={12} color="#60a5fa" />
+                            <span><strong style={{ color: "#e4e4e7" }}>{cls.team_count ?? 0}</strong> Teams</span>
                           </div>
-                          <div style={{ padding: "6px 10px", borderRadius: "6px", background: "#111218", border: "1px solid #1f2028", fontSize: "10px", color: "#a1a1aa" }}>
-                            📁 <strong style={{ color: "#e4e4e7" }}>{cls.project_count ?? 0}</strong> Projects
+                          <div style={{ padding: "6px 10px", borderRadius: "6px", background: "#111218", border: "1px solid #1f2028", fontSize: "10px", color: "#a1a1aa", display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                            <FolderGit2 size={12} color="#4ade80" />
+                            <span><strong style={{ color: "#e4e4e7" }}>{cls.project_count ?? 0}</strong> Projects</span>
                           </div>
                         </div>
                       </div>
@@ -856,7 +802,6 @@ function Dashboard() {
                     const isGit = act.activity_type?.startsWith("github");
                     const isTask = act.activity_type === "task_completion";
                     const isArena = act.activity_type === "arena_challenge";
-                    const icon = isGit ? "⎇" : isTask ? "✓" : isArena ? "⚔" : "⚡";
 
                     return (
                       <div key={act.id} className="activity-item" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -876,7 +821,15 @@ function Dashboard() {
                             flexShrink: 0,
                           }}
                         >
-                          {icon}
+                          {isGit ? (
+                            <GitCommit size={14} />
+                          ) : isTask ? (
+                            <Check size={14} />
+                          ) : isArena ? (
+                            <Zap size={14} />
+                          ) : (
+                            <Sparkles size={14} />
+                          )}
                         </div>
                         <div className="activity-info" style={{ flex: 1 }}>
                           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -928,9 +881,9 @@ function Dashboard() {
               <h2 style={{ fontSize: "20px", margin: 0 }}>Create New Project</h2>
               <button
                 onClick={() => setShowCreateModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -1123,9 +1076,9 @@ function Dashboard() {
               <h2 style={{ fontSize: "20px", margin: 0 }}>Join a Class</h2>
               <button
                 onClick={() => setShowJoinModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -1203,16 +1156,16 @@ function Dashboard() {
                   setShowCreateClassModal(false);
                   setCreatedClassCode(null);
                 }}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
             {createdClassCode ? (
               <div style={{ textAlign: "center", padding: "10px 0" }}>
-                <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: "#14291f", color: "#4ade80", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", fontSize: "20px" }}>
-                  ✓
+                <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: "#14291f", color: "#4ade80", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+                  <Check size={22} />
                 </div>
                 <h3 style={{ fontSize: "17px", margin: "0 0 8px", color: "#f4f4f5" }}>Class Created Successfully!</h3>
                 <p style={{ color: "#a1a1aa", fontSize: "12px", margin: "0 0 20px" }}>
@@ -1238,9 +1191,19 @@ function Dashboard() {
                   <button
                     onClick={() => handleCopyCode(createdClassCode)}
                     className="primary-button"
-                    style={{ fontSize: "11px", padding: "8px 14px" }}
+                    style={{ fontSize: "11px", padding: "8px 14px", display: "inline-flex", alignItems: "center", gap: "5px" }}
                   >
-                    {copiedCode === createdClassCode ? "✓ Copied!" : "📋 Copy Code"}
+                    {copiedCode === createdClassCode ? (
+                      <>
+                        <Check size={12} />
+                        <span>Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={12} />
+                        <span>Copy Code</span>
+                      </>
+                    )}
                   </button>
                 </div>
 
@@ -1341,13 +1304,26 @@ function Dashboard() {
                       color: copiedCode === classRosterData?.code ? "#000" : "#d8b4fe",
                       border: "none",
                       borderRadius: "4px",
-                      padding: "2px 8px",
+                      padding: "3px 8px",
                       fontSize: "9px",
                       fontWeight: "700",
                       cursor: "pointer",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
                     }}
                   >
-                    {copiedCode === classRosterData?.code ? "✓ Copied" : "📋 Copy Code"}
+                    {copiedCode === classRosterData?.code ? (
+                      <>
+                        <Check size={11} />
+                        <span>Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={11} />
+                        <span>Copy Code</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
@@ -1356,9 +1332,9 @@ function Dashboard() {
                   setSelectedClassIdForRoster(null);
                   setClassRosterData(null);
                 }}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -1448,13 +1424,14 @@ function Dashboard() {
                     </h4>
                     <button
                       className="secondary-button"
-                      style={{ fontSize: "10px", padding: "4px 8px" }}
+                      style={{ fontSize: "10px", padding: "4px 8px", display: "inline-flex", alignItems: "center", gap: "4px" }}
                       onClick={() => {
                         setNewTeamClassId(classRosterData.id);
                         setShowCreateTeamModal(true);
                       }}
                     >
-                      + Add Team
+                      <Plus size={11} />
+                      <span>Add Team</span>
                     </button>
                   </div>
 
@@ -1530,9 +1507,9 @@ function Dashboard() {
               <h2 style={{ fontSize: "20px", margin: 0 }}>Create New Team</h2>
               <button
                 onClick={() => setShowCreateTeamModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 

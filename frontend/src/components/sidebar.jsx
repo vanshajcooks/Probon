@@ -1,5 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Bell,
+  Compass,
+  CheckSquare,
+  MessageSquare,
+  Zap,
+  LogOut,
+  FolderGit2,
+  Check,
+} from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../api/client";
 import "../pages/Dashboard.css";
@@ -60,7 +71,7 @@ function Sidebar({ projects = [] }) {
         style={{ cursor: "pointer" }}
         onClick={() => navigate("/dashboard")}
       >
-        Project<span>Hub</span>
+        Proj<span>NaN</span>
       </div>
 
       <nav className="dashboard-nav">
@@ -70,7 +81,9 @@ function Sidebar({ projects = [] }) {
           className={`dashboard-nav-item ${isActive("/dashboard") ? "active" : ""}`}
           onClick={() => navigate("/dashboard")}
         >
-          <span className="dashboard-nav-icon">⌂</span>
+          <span className="dashboard-nav-icon">
+            <LayoutDashboard size={16} />
+          </span>
           <span>Dashboard</span>
         </button>
 
@@ -78,7 +91,9 @@ function Sidebar({ projects = [] }) {
           className={`dashboard-nav-item ${showNotifications ? "active" : ""}`}
           onClick={() => setShowNotifications(!showNotifications)}
         >
-          <span className="dashboard-nav-icon">🔔</span>
+          <span className="dashboard-nav-icon">
+            <Bell size={16} />
+          </span>
           <span style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             <span>Notifications</span>
             {unreadCount > 0 && (
@@ -167,7 +182,9 @@ function Sidebar({ projects = [] }) {
           className={`dashboard-nav-item ${isActive("/projects") ? "active" : ""}`}
           onClick={() => navigate("/projects")}
         >
-          <span className="dashboard-nav-icon">◇</span>
+          <span className="dashboard-nav-icon">
+            <Compass size={16} />
+          </span>
           <span>Explore Projects</span>
         </button>
 
@@ -175,7 +192,9 @@ function Sidebar({ projects = [] }) {
           className={`dashboard-nav-item ${isActive("/tasks") ? "active" : ""}`}
           onClick={() => navigate("/tasks")}
         >
-          <span className="dashboard-nav-icon">✓</span>
+          <span className="dashboard-nav-icon">
+            <CheckSquare size={16} />
+          </span>
           <span>My Tasks</span>
         </button>
 
@@ -183,7 +202,9 @@ function Sidebar({ projects = [] }) {
           className={`dashboard-nav-item ${isActive("/chat") ? "active" : ""}`}
           onClick={() => navigate("/chat")}
         >
-          <span className="dashboard-nav-icon">💬</span>
+          <span className="dashboard-nav-icon">
+            <MessageSquare size={16} />
+          </span>
           <span>Group Chat</span>
         </button>
 
@@ -191,7 +212,9 @@ function Sidebar({ projects = [] }) {
           className={`dashboard-nav-item ${isActive("/arena") ? "active" : ""}`}
           onClick={() => navigate("/arena")}
         >
-          <span className="dashboard-nav-icon">⚡</span>
+          <span className="dashboard-nav-icon">
+            <Zap size={16} />
+          </span>
           <span>Weekly Arena</span>
         </button>
 
@@ -213,7 +236,7 @@ function Sidebar({ projects = [] }) {
                   }`}
                   onClick={() => navigate(`/projects/${p.id}`)}
                 >
-                  <span className="dashboard-nav-icon">{initials}</span>
+                  <span className="dashboard-nav-icon" style={{ fontSize: "10px", fontWeight: "700" }}>{initials}</span>
                   <span>{p.name}</span>
                 </button>
               );
@@ -248,9 +271,14 @@ function Sidebar({ projects = [] }) {
             color: "#858995",
             fontSize: "11px",
             cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "6px",
           }}
         >
-          Log Out
+          <LogOut size={13} />
+          <span>Log Out</span>
         </button>
       </div>
     </aside>

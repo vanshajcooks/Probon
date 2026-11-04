@@ -1,0 +1,105 @@
+@startuml data_overview
+skinparam dpi 300
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 11
+skinparam classFontSize 13
+skinparam roundCorner 6
+skinparam linetype ortho
+left to right direction
+
+package "Academic & Team Scoping" {
+  class "Users" as Users {
+    id : INTEGER
+    name : TEXT
+    username : TEXT
+    email : TEXT
+    role : 'teacher' | 'student'
+    xp : INTEGER
+  }
+
+  class "Classes" as Classes {
+    id : INTEGER
+    name : TEXT
+    code : TEXT (unique)
+    teacher_id : INTEGER
+  }
+
+  class "Teams" as Teams {
+    id : INTEGER
+    name : TEXT
+    class_id : INTEGER
+    leader_id : INTEGER
+  }
+
+  class "Projects" as Projects {
+    id : INTEGER
+    name : TEXT
+    team_id : INTEGER
+    class_id : INTEGER
+    progress : INTEGER
+    status : TEXT
+  }
+}
+
+package "Task Execution & Telemetry" {
+  class "Tasks" as Tasks {
+    id : INTEGER
+    project_id : INTEGER
+    title : TEXT
+    priority : TEXT
+    status : TEXT
+    xp_value : INTEGER
+  }
+
+  class "TaskVerifications" as TaskVerifications {
+    id : INTEGER
+    task_id : INTEGER
+    confidence_score : REAL
+    verification_state : TEXT
+    verified_by_id : INTEGER
+  }
+
+  class "Contributions" as Contributions {
+    id : INTEGER
+    user_id : INTEGER
+    project_id : INTEGER
+    task_id : INTEGER
+    xp : INTEGER
+    external_id : TEXT (unique)
+  }
+
+  class "Repositories" as Repositories {
+    id : INTEGER
+    project_id : INTEGER
+    repo_url : TEXT
+    sync_status : TEXT
+  }
+
+  class "GitHubActivities" as GitHubActivities {
+    id : INTEGER
+    repository_id : INTEGER
+    activity_type : TEXT
+    commit_hash : TEXT
+    pr_number : INTEGER
+  }
+}
+
+Users "1" --> "0..*" Classes : creates
+Users "0..*" --> "0..*" Classes : enrolls
+Classes "1" --> "0..*" Teams : contains
+Teams "1" --> "0..*" Projects : undertakes
+
+Projects "1" --> "0..*" Tasks : contains
+Tasks "1" --> "0..1" TaskVerifications : pre-scores
+TaskVerifications --> Users : confirmed by
+
+Projects "1" --> "0..1" Repositories : links
+Repositories "1" --> "0..*" GitHubActivities : ingests
+GitHubActivities --> TaskVerifications : matches
+
+Contributions --> Users : credits XP
+Contributions --> Tasks : completed task
+
+@enduml

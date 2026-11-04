@@ -1,0 +1,36 @@
+@startuml system_architecture
+skinparam dpi 300
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 13
+skinparam packageFontSize 14
+skinparam arrowFontSize 12
+skinparam roundCorner 8
+skinparam linetype ortho
+
+package "1. Client Layer (Presentation)" {
+  [React 19 Single-Page Application\n(React Router v7, Vite)] as Frontend
+}
+
+package "2. API Gateway & Security Layer" {
+  [Express.js REST API Pipeline\n(JWT Guard, Role-Based Access Control, Rate Limiter)] as APIGateway
+}
+
+package "3. Domain Service Layer" {
+  [Business Logic Services\n(Auth, Classes, Teams, Projects, Tasks, GitHub, Analytics)] as Services
+  [Rule-Based Heuristic Evaluator\n(Deterministic Verification Pre-Scoring)] as HeuristicEngine
+  Services -right-> HeuristicEngine
+}
+
+package "4. Persistence & External Services" {
+  database "Embedded SQLite Database\n(WAL Concurrency Mode, Foreign Keys)]" as DB
+  cloud "GitHub REST API v3\n(Remote Commits, PRs, Issues)]" as GitHubAPI
+}
+
+Frontend -down-> APIGateway : HTTP / JSON Requests
+APIGateway -down-> Services : Controller Invocations
+Services -down-> DB : Synchronous Transactions (node:sqlite)
+Services -right-> GitHubAPI : Remote Telemetry Synchronization
+
+@enduml

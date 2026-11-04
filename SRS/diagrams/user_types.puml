@@ -1,0 +1,49 @@
+@startuml user_types
+skinparam dpi 300
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 13
+skinparam roundCorner 8
+
+rectangle "Probon Users" as Users
+
+rectangle "Teachers\n(Course Instructors)" as Teachers
+rectangle "Students\n(Team Members)" as Students
+rectangle "Infrastructure Administrator\n(Server / DevOps Level Only)" as Admin
+
+rectangle "Student Team Leader\n(Designated Student Role)" as Leader
+
+Users -down-> Teachers
+Users -down-> Students
+Users -down-> Admin
+
+Students -down-> Leader
+
+note right of Teachers
+  • Create & manage classes
+  • Set milestone checkpoints
+  • Authoritative task verification
+  • Qualitative 1-5 star feedback
+end note
+
+note right of Students
+  • Join class via unique code
+  • Form collaborative project teams
+  • Work on Kanban tasks & submit evidence
+  • Earn XP & track contribution share
+end note
+
+note right of Leader
+  • Links GitHub repository URL
+  • Coordinates team milestone dates
+end note
+
+note right of Admin
+  • Server provisioning & deployment
+  • SQLite WAL database backups
+  • Environment configuration
+  (No in-app student/teacher role)
+end note
+
+@enduml

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "../components/sidebar";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../api/client";
+import { Zap, Trophy, FolderKanban, GraduationCap, Bug, Wrench, Users, Award } from "lucide-react";
 
 function Profile() {
   const { user } = useAuth();
@@ -22,9 +23,9 @@ function Profile() {
   }, []);
 
   const badges = [
-    { title: "Bug Hunter", icon: "🐛", desc: "Resolved 5 verified issues in project repositories" },
-    { title: "Builder", icon: "🔧", desc: "Created 3 modular full-stack features" },
-    { title: "Team Player", icon: "🤝", desc: "Collaborated on cross-functional tasks across 2 milestones" },
+    { title: "Bug Hunter", icon: <Bug size={24} color="#f87171" />, desc: "Resolved 5 verified issues in project repositories" },
+    { title: "Builder", icon: <Wrench size={24} color="#38bdf8" />, desc: "Created 3 modular full-stack features" },
+    { title: "Team Player", icon: <Users size={24} color="#34d399" />, desc: "Collaborated on cross-functional tasks across 2 milestones" },
   ];
 
   return (
@@ -34,7 +35,7 @@ function Profile() {
       <main className="dashboard-main">
         <header className="dashboard-topbar">
           <div className="breadcrumb">
-            <span>ProjectHub</span>
+            <span>ProjNaN</span>
             <span>›</span>
             <span>Profile</span>
           </div>
@@ -102,25 +103,25 @@ function Profile() {
           {/* STATS */}
           <div className="stats-grid" style={{ marginBottom: "32px" }}>
             <div className="stat-card">
-              <span className="stat-icon">⚡</span>
+              <span className="stat-icon" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}><Zap size={18} color="#a78bfa" /></span>
               <h3 className="stat-value">{user?.xp?.toLocaleString() || 0}</h3>
               <div className="stat-label">Total XP</div>
             </div>
 
             <div className="stat-card">
-              <span className="stat-icon">🏆</span>
+              <span className="stat-icon" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}><Trophy size={18} color="#f59e0b" /></span>
               <h3 className="stat-value">{user?.points?.toLocaleString() || 0}</h3>
               <div className="stat-label">Contribution Points</div>
             </div>
 
             <div className="stat-card">
-              <span className="stat-icon">◇</span>
+              <span className="stat-icon" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}><FolderKanban size={18} color="#38bdf8" /></span>
               <h3 className="stat-value">{userProjects.length}</h3>
               <div className="stat-label">Projects</div>
             </div>
 
             <div className="stat-card">
-              <span className="stat-icon">🎓</span>
+              <span className="stat-icon" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}><GraduationCap size={18} color="#10b981" /></span>
               <h3 className="stat-value">{classes.length}</h3>
               <div className="stat-label">Enrolled Classes</div>
             </div>
@@ -136,7 +137,9 @@ function Profile() {
               marginBottom: "32px",
             }}
           >
-            <h3 style={{ margin: "0 0 16px", fontSize: "16px" }}>Earned Achievements</h3>
+            <h3 style={{ margin: "0 0 16px", fontSize: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <Award size={18} color="#a78bfa" /> Earned Achievements
+            </h3>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "14px" }}>
               {badges.map((b, idx) => (
@@ -152,7 +155,7 @@ function Profile() {
                     alignItems: "center",
                   }}
                 >
-                  <span style={{ fontSize: "28px" }}>{b.icon}</span>
+                  <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "8px", background: "rgba(255, 255, 255, 0.03)" }}>{b.icon}</span>
                   <div>
                     <strong style={{ fontSize: "13px", display: "block", color: "#e4e4e7" }}>{b.title}</strong>
                     <span style={{ fontSize: "10px", color: "#71717a", display: "block", marginTop: "2px" }}>

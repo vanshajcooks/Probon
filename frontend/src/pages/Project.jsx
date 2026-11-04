@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Taskcard from "../components/Taskcard";
 import { api } from "../api/client";
+import { MessageSquare, Plus, ArrowRight, RefreshCw, ExternalLink, Zap, TrendingUp, X, Star } from "lucide-react";
 
 function Project() {
   const { id } = useParams();
@@ -300,7 +301,7 @@ function Project() {
         <header className="dashboard-topbar">
           <div className="breadcrumb">
             <span style={{ cursor: "pointer" }} onClick={() => navigate("/dashboard")}>
-              ProjectHub
+              ProjNaN
             </span>
             <span>›</span>
             <span>Projects</span>
@@ -311,10 +312,10 @@ function Project() {
           <div className="topbar-actions">
             <button
               className="primary-button"
-              style={{ fontSize: "11px", padding: "8px 12px" }}
+              style={{ fontSize: "11px", padding: "8px 12px", display: "flex", alignItems: "center", gap: "6px" }}
               onClick={() => navigate("/chat")}
             >
-              💬 Project Chat
+              <MessageSquare size={14} /> Project Chat
             </button>
           </div>
         </header>
@@ -409,16 +410,16 @@ function Project() {
                   <button
                     onClick={() => setShowTaskModal(true)}
                     className="primary-button"
-                    style={{ fontSize: "10px", padding: "6px 10px" }}
+                    style={{ fontSize: "10px", padding: "6px 10px", display: "flex", alignItems: "center", gap: "4px" }}
                   >
-                    + Add Task
+                    <Plus size={12} /> Add Task
                   </button>
                   <button
                     onClick={() => navigate("/tasks")}
                     className="secondary-button"
-                    style={{ fontSize: "10px", padding: "6px 10px" }}
+                    style={{ fontSize: "10px", padding: "6px 10px", display: "flex", alignItems: "center", gap: "4px" }}
                   >
-                    Manage in Tasks →
+                    Manage in Tasks <ArrowRight size={12} />
                   </button>
                 </div>
               </div>
@@ -447,9 +448,9 @@ function Project() {
                 <button
                   onClick={() => setShowMilestoneModal(true)}
                   className="secondary-button"
-                  style={{ fontSize: "10px", padding: "6px 10px" }}
+                  style={{ fontSize: "10px", padding: "6px 10px", display: "flex", alignItems: "center", gap: "4px" }}
                 >
-                  + Add Milestone
+                  <Plus size={12} /> Add Milestone
                 </button>
               </div>
 
@@ -522,18 +523,18 @@ function Project() {
                     <button
                       onClick={handleSyncRepo}
                       className="secondary-button"
-                      style={{ fontSize: "9px", padding: "4px 8px" }}
+                      style={{ fontSize: "9px", padding: "4px 8px", display: "flex", alignItems: "center", gap: "4px" }}
                       disabled={repoSyncing}
                     >
-                      {repoSyncing ? "Syncing..." : "↻ Sync Now"}
+                      <RefreshCw size={10} /> {repoSyncing ? "Syncing..." : "Sync Now"}
                     </button>
                   ) : (
                     <button
                       onClick={() => setShowRepoModal(true)}
                       className="primary-button"
-                      style={{ fontSize: "9px", padding: "4px 8px" }}
+                      style={{ fontSize: "9px", padding: "4px 8px", display: "flex", alignItems: "center", gap: "4px" }}
                     >
-                      Connect Repo
+                      <Plus size={10} /> Connect Repo
                     </button>
                   )}
                 </div>
@@ -550,9 +551,12 @@ function Project() {
                           fontSize: "12px",
                           fontWeight: "600",
                           textDecoration: "none",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "4px",
                         }}
                       >
-                        {project.repository.owner} / {project.repository.repo_name} ↗
+                        {project.repository.owner} / {project.repository.repo_name} <ExternalLink size={11} />
                       </a>
                       <span
                         style={{
@@ -770,9 +774,9 @@ function Project() {
                   <button
                     onClick={() => setShowFeedbackModal(true)}
                     className="secondary-button"
-                    style={{ fontSize: "9px", padding: "4px 8px" }}
+                    style={{ fontSize: "9px", padding: "4px 8px", display: "flex", alignItems: "center", gap: "4px" }}
                   >
-                    + Add Review
+                    <Plus size={10} /> Add Review
                   </button>
                 </div>
 
@@ -792,9 +796,16 @@ function Project() {
                           <span style={{ fontSize: "10px", fontWeight: "700", color: "#e4e4e7" }}>
                             {f.author_name} ({f.author_role})
                           </span>
-                          <span style={{ color: "#facc15", fontSize: "10px" }}>
-                            {"★".repeat(f.rating || 5)}{"☆".repeat(5 - (f.rating || 5))}
-                          </span>
+                          <div style={{ display: "flex", gap: "2px" }}>
+                            {[1, 2, 3, 4, 5].map((s) => (
+                              <Star
+                                key={s}
+                                size={11}
+                                fill={s <= (f.rating || 5) ? "#facc15" : "transparent"}
+                                color={s <= (f.rating || 5) ? "#facc15" : "#4b5563"}
+                              />
+                            ))}
+                          </div>
                         </div>
                         <p style={{ margin: "4px 0", fontSize: "11px", color: "#a1a1aa", lineHeight: "1.4" }}>
                           {f.comment}
@@ -846,6 +857,9 @@ function Project() {
               <div style={{ display: "flex", gap: "10px" }}>
                 <span
                   style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "5px",
                     padding: "5px 10px",
                     borderRadius: "6px",
                     background: "#181326",
@@ -855,10 +869,13 @@ function Project() {
                     fontWeight: "600",
                   }}
                 >
-                  ⚡ {analytics?.summary?.totalContributions || 0} Total Activities
+                  <Zap size={13} /> {analytics?.summary?.totalContributions || 0} Total Activities
                 </span>
                 <span
                   style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "5px",
                     padding: "5px 10px",
                     borderRadius: "6px",
                     background: "#101a16",
@@ -868,7 +885,7 @@ function Project() {
                     fontWeight: "600",
                   }}
                 >
-                  📈 {analytics?.summary?.completionRate || 0}% Task Completion
+                  <TrendingUp size={13} /> {analytics?.summary?.completionRate || 0}% Task Completion
                 </span>
               </div>
             </div>
@@ -1122,9 +1139,9 @@ function Project() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Connect GitHub Repository</h2>
               <button
                 onClick={() => setShowRepoModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -1203,9 +1220,9 @@ function Project() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Add Project Milestone</h2>
               <button
                 onClick={() => setShowMilestoneModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -1274,9 +1291,9 @@ function Project() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Create Task for {project.name}</h2>
               <button
                 onClick={() => setShowTaskModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -1394,9 +1411,9 @@ function Project() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Submit Task Evidence</h2>
               <button
                 onClick={() => setEvidenceTask(null)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -1468,9 +1485,9 @@ function Project() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Add Instructor Feedback</h2>
               <button
                 onClick={() => setShowFeedbackModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 

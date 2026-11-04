@@ -233,7 +233,7 @@ export async function runSeed() {
     const repoInsert = execute(
       `INSERT INTO repositories (project_id, repo_url, repo_name, owner, default_branch, last_synced_at)
        VALUES (?, ?, ?, ?, 'main', datetime('now', '-1 hours'));`,
-      [p1Id, 'https://github.com/projecthub/ai-interviewer', 'ai-interviewer', 'projecthub']
+      [p1Id, 'https://github.com/projnan/ai-interviewer', 'ai-interviewer', 'projnan']
     );
     const repoId = Number(repoInsert.lastInsertRowid);
 

@@ -1,5 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  MessageSquare,
+  Code2,
+  Bot,
+  CheckSquare,
+  Megaphone,
+  Lock,
+  ShieldCheck,
+  ArrowLeft,
+  Users,
+} from "lucide-react";
 import MessageBubble from "./MessageBubble";
 import ChatInput from "./ChatInput";
 import { useAuth } from "../context/AuthContext";
@@ -17,12 +28,21 @@ function ChatWindow() {
 
   // Default fallback channels if project has no channels yet
   const defaultChannels = [
-    { id: "general", name: "General", icon: "💬", count: 4 },
-    { id: "development", name: "Development", icon: "💻", count: 0 },
-    { id: "ai", name: "AI / ML", icon: "🤖", count: 0 },
-    { id: "tasks", name: "Tasks", icon: "✓", count: 0 },
-    { id: "announcements", name: "Announcements", icon: "📢", count: 0 },
+    { id: "general", name: "General", count: 4 },
+    { id: "development", name: "Development", count: 0 },
+    { id: "ai", name: "AI / ML", count: 0 },
+    { id: "tasks", name: "Tasks", count: 0 },
+    { id: "announcements", name: "Announcements", count: 0 },
   ];
+
+  const getChannelIcon = (nameOrId) => {
+    const key = (nameOrId || "").toString().toLowerCase();
+    if (key.includes("dev") || key.includes("code")) return <Code2 size={15} />;
+    if (key.includes("ai") || key.includes("ml")) return <Bot size={15} />;
+    if (key.includes("task")) return <CheckSquare size={15} />;
+    if (key.includes("announc")) return <Megaphone size={15} />;
+    return <MessageSquare size={15} />;
+  };
 
   // Load user's projects
   useEffect(() => {
@@ -69,7 +89,7 @@ function ChatWindow() {
           id: 1,
           sender: "Aryan",
           initials: "AR",
-          message: "Welcome to the project group! 🚀",
+          message: "Welcome to the project group! Let's build together.",
           time: "4:02 PM",
           own: user?.name?.startsWith("Aryan"),
         },
@@ -153,9 +173,9 @@ function ChatWindow() {
             onClick={() => navigate("/dashboard")}
             title="Go to Dashboard"
           >
-            <div className="project-logo">PH</div>
+            <div className="project-logo">PN</div>
             <div>
-              <h2>ProjectHub</h2>
+              <h2>ProjNaN</h2>
               <span>Workspace</span>
             </div>
           </div>
@@ -170,10 +190,14 @@ function ChatWindow() {
               fontSize: "11px",
               fontWeight: "600",
               cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
             }}
             title="Return to Dashboard"
           >
-            ← Dashboard
+            <ArrowLeft size={13} />
+            <span>Dashboard</span>
           </button>
         </div>
 
@@ -206,7 +230,9 @@ function ChatWindow() {
               }`}
               onClick={() => setActiveChannel(channel)}
             >
-              <span className="channel-icon">{channel.icon || "💬"}</span>
+              <span className="channel-icon" style={{ display: "inline-flex", alignItems: "center" }}>
+                {getChannelIcon(channel.name || channel.id)}
+              </span>
               <span className="channel-name">{channel.name}</span>
               {channel.message_count > 0 && (
                 <span className="channel-count">{channel.message_count}</span>
@@ -242,7 +268,7 @@ function ChatWindow() {
 
         <div className="sidebar-bottom">
           <div className="encryption-status">
-            <span>🔒</span>
+            <Lock size={15} color="#a78bfa" />
             <div>
               <strong>Encrypted Group</strong>
               <small>Secure project communication</small>
@@ -270,13 +296,18 @@ function ChatWindow() {
               <span className="status-dot" />
               3 online
             </div>
-            <div className="encrypted-badge">🔒 End-to-end encrypted</div>
+            <div className="encrypted-badge" style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+              <Lock size={12} />
+              <span>End-to-end encrypted</span>
+            </div>
           </div>
         </header>
 
         {/* Security banner */}
         <div className="security-banner">
-          <div className="security-icon">🔐</div>
+          <div className="security-icon" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <ShieldCheck size={18} color="#a78bfa" />
+          </div>
           <div>
             <strong>Messages are encrypted</strong>
             <p>Only members of this project group can access these conversations.</p>
@@ -300,7 +331,7 @@ function ChatWindow() {
         <ChatInput onSend={handleSendMessage} />
 
         <div className="chat-footer">
-          ProjectHub secure project communication
+          ProjNaN secure project communication
         </div>
       </main>
     </div>

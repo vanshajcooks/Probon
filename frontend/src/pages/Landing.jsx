@@ -1,4 +1,17 @@
 import { Link } from "react-router-dom";
+import {
+  Sparkles,
+  ArrowRight,
+  LayoutDashboard,
+  Compass,
+  CheckSquare,
+  Zap,
+  Lightbulb,
+  Users,
+  Bot,
+  Bug,
+  Wrench,
+} from "lucide-react";
 import Navbar from "../components/navbar";
 
 function Landing() {
@@ -16,7 +29,8 @@ function Landing() {
           <div className="hero-content">
 
             <div className="hero-badge">
-              🚀 The collaborative space for developers
+              <Sparkles size={14} style={{ marginRight: "6px", color: "#a78bfa" }} />
+              <span>The collaborative space for developers</span>
             </div>
 
             <h1>
@@ -26,15 +40,16 @@ function Landing() {
             </h1>
 
             <p>
-              ProjectHub is a collaborative platform where developers
+              ProjNaN is a collaborative platform where developers
               can share project ideas, find teammates, contribute to
               real projects, and grow their developer reputation.
             </p>
 
             <div className="hero-buttons">
 
-              <Link to="/register" className="primary-button">
-                Start Building →
+              <Link to="/register" className="primary-button" style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                <span>Start Building</span>
+                <ArrowRight size={14} />
               </Link>
 
               <Link to="/login" className="secondary-button">
@@ -79,7 +94,7 @@ function Landing() {
                 </div>
 
                 <div className="window-title">
-                  projecthub / ai-interviewer
+                  projnan / ai-interviewer
                 </div>
               </div>
 
@@ -88,23 +103,23 @@ function Landing() {
                 <div className="preview-sidebar">
 
                   <div className="preview-logo">
-                    PH
+                    PN
                   </div>
 
                   <div className="preview-nav active">
-                    ◈
+                    <LayoutDashboard size={14} />
                   </div>
 
                   <div className="preview-nav">
-                    ◇
+                    <Compass size={14} />
                   </div>
 
                   <div className="preview-nav">
-                    ✓
+                    <CheckSquare size={14} />
                   </div>
 
                   <div className="preview-nav">
-                    ⚡
+                    <Zap size={14} />
                   </div>
 
                 </div>
@@ -156,8 +171,9 @@ function Landing() {
                       <span>+3</span>
                     </div>
 
-                    <div className="preview-xp">
-                      ⚡ 1,240 XP
+                    <div className="preview-xp" style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                      <Zap size={12} />
+                      <span>1,240 XP</span>
                     </div>
 
                   </div>
@@ -178,7 +194,7 @@ function Landing() {
         <section className="features-section" id="features">
 
           <div className="section-label">
-            WHY PROJECTHUB
+            WHY PROJNAN
           </div>
 
           <h2>
@@ -188,14 +204,16 @@ function Landing() {
 
           <p className="section-description">
             From finding projects to earning recognition,
-            ProjectHub brings the complete developer collaboration
+            ProjNaN brings the complete developer collaboration
             experience into one platform.
           </p>
 
           <div className="features-grid">
 
             <div className="feature-card">
-              <div className="feature-icon">💡</div>
+              <div className="feature-icon">
+                <Lightbulb size={20} color="#a78bfa" />
+              </div>
               <h3>Share Ideas</h3>
               <p>
                 Publish your project ideas and discover developers
@@ -204,7 +222,9 @@ function Landing() {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">🤝</div>
+              <div className="feature-icon">
+                <Users size={20} color="#a78bfa" />
+              </div>
               <h3>Collaborate</h3>
               <p>
                 Create teams, assign tasks and work together
@@ -213,7 +233,9 @@ function Landing() {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">⚡</div>
+              <div className="feature-icon">
+                <Zap size={20} color="#a78bfa" />
+              </div>
               <h3>Earn Recognition</h3>
               <p>
                 Earn XP, contribution points and badges as
@@ -222,7 +244,9 @@ function Landing() {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">🤖</div>
+              <div className="feature-icon">
+                <Bot size={20} color="#a78bfa" />
+              </div>
               <h3>AI Assisted</h3>
               <p>
                 Get intelligent project recommendations,
@@ -317,12 +341,13 @@ function Landing() {
               </h2>
 
               <p>
-                ProjectHub turns your project contributions
+                ProjNaN turns your project contributions
                 into a visible developer reputation.
               </p>
 
-              <Link to="/register" className="primary-button">
-                Create Your Profile →
+              <Link to="/register" className="primary-button" style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                <span>Create Your Profile</span>
+                <ArrowRight size={14} />
               </Link>
             </div>
 
@@ -359,9 +384,18 @@ function Landing() {
               </div>
 
               <div className="badges">
-                <span>🐛 Bug Hunter</span>
-                <span>🔧 Builder</span>
-                <span>🤝 Team Player</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                  <Bug size={12} color="#f87171" />
+                  <span>Bug Hunter</span>
+                </span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                  <Wrench size={12} color="#60a5fa" />
+                  <span>Builder</span>
+                </span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                  <Users size={12} color="#4ade80" />
+                  <span>Team Player</span>
+                </span>
               </div>
 
             </div>
@@ -375,7 +409,7 @@ function Landing() {
 
       <footer>
         <div className="logo">
-          Project<span>Hub</span>
+          Proj<span>NaN</span>
         </div>
 
         <p>
@@ -383,7 +417,7 @@ function Landing() {
         </p>
 
         <span>
-          © 2026 ProjectHub
+          © 2026 ProjNaN
         </span>
       </footer>
 

@@ -1,3 +1,5 @@
+import { CheckCheck } from "lucide-react";
+
 function MessageBubble({ message }) {
   return (
     <div
@@ -5,7 +7,6 @@ function MessageBubble({ message }) {
         message.own ? "own" : ""
       }`}
     >
-
       {!message.own && (
         <div className="message-avatar">
           {message.initials}
@@ -13,7 +14,6 @@ function MessageBubble({ message }) {
       )}
 
       <div className="message-content">
-
         {!message.own && (
           <div className="message-meta">
             <strong>{message.sender}</strong>
@@ -34,14 +34,12 @@ function MessageBubble({ message }) {
         {message.own && (
           <div className="own-time">
             {message.time}
-            <span className="message-check">
-              ✓✓
+            <span className="message-check" style={{ display: "inline-flex", alignItems: "center" }}>
+              <CheckCheck size={13} color="#a78bfa" />
             </span>
           </div>
         )}
-
       </div>
-
     </div>
   );
 }

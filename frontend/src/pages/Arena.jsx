@@ -1,4 +1,13 @@
 import { useState, useEffect } from "react";
+import {
+  Zap,
+  Trophy,
+  Award,
+  Sparkles,
+  Check,
+  X,
+  ArrowRight,
+} from "lucide-react";
 import Sidebar from "../components/sidebar";
 import { api } from "../api/client";
 
@@ -90,7 +99,7 @@ function Arena() {
       <main className="dashboard-main">
         <header className="dashboard-topbar">
           <div className="breadcrumb">
-            <span>ProjectHub</span>
+            <span>ProjNaN</span>
             <span>›</span>
             <span>Weekly Arena</span>
           </div>
@@ -100,8 +109,9 @@ function Arena() {
           <section className="welcome-section">
             <div>
               <div className="welcome-label">COMPETITIVE CODE SPRINT</div>
-              <h1>
-                Weekly Arena <span>⚡</span>
+              <h1 style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span>Weekly Arena</span>
+                <Zap size={22} color="#f59e0b" />
               </h1>
               <p className="welcome-description">
                 Tackle weekly software engineering challenges, submit PR/commit evidence to earn bonus XP, and climb the developer leaderboard.
@@ -125,12 +135,15 @@ function Arena() {
                 justifyContent: "space-between",
               }}
             >
-              <span>🎉 {bannerMessage}</span>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                <Sparkles size={14} />
+                <span>{bannerMessage}</span>
+              </span>
               <button
                 onClick={() => setBannerMessage("")}
-                style={{ background: "none", border: "none", color: "#4ade80", cursor: "pointer", fontSize: "14px" }}
+                style={{ background: "none", border: "none", color: "#4ade80", cursor: "pointer", display: "flex", alignItems: "center" }}
               >
-                ✕
+                <X size={15} />
               </button>
             </div>
           )}
@@ -157,9 +170,13 @@ function Arena() {
                 fontSize: "12px",
                 fontWeight: activeTab === "challenges" ? "600" : "400",
                 cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
               }}
             >
-              Active Challenges ({challenges.length})
+              <Zap size={13} />
+              <span>Active Challenges ({challenges.length})</span>
             </button>
             <button
               onClick={() => setActiveTab("leaderboard")}
@@ -173,9 +190,13 @@ function Arena() {
                 fontSize: "12px",
                 fontWeight: activeTab === "leaderboard" ? "600" : "400",
                 cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
               }}
             >
-              Live Leaderboard 🏆
+              <Trophy size={13} color="#f59e0b" />
+              <span>Live Leaderboard</span>
             </button>
             <button
               onClick={() => setActiveTab("achievements")}
@@ -189,9 +210,13 @@ function Arena() {
                 fontSize: "12px",
                 fontWeight: activeTab === "achievements" ? "600" : "400",
                 cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
               }}
             >
-              Badges & Achievements 🎖️ ({achievements.length})
+              <Award size={13} color="#c084fc" />
+              <span>Badges & Achievements ({achievements.length})</span>
             </button>
           </div>
 
@@ -257,28 +282,35 @@ function Arena() {
                               textAlign: "center",
                               fontSize: "11px",
                               fontWeight: "600",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: "5px",
                             }}
                           >
-                            ✓ Completed (+{c.xp_reward} XP)
+                            <Check size={13} />
+                            <span>Completed (+{c.xp_reward} XP)</span>
                           </div>
                         ) : c.user_status === "accepted" ? (
                           <button
                             className="primary-button"
-                            style={{ width: "100%", fontSize: "11px", padding: "9px" }}
+                            style={{ width: "100%", fontSize: "11px", padding: "9px", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "5px" }}
                             onClick={() => {
                               setCompletingChallenge(c);
                               setEvidenceText("");
                             }}
                           >
-                            Submit Evidence & Claim XP →
+                            <span>Submit Evidence & Claim XP</span>
+                            <ArrowRight size={12} />
                           </button>
                         ) : (
                           <button
                             className="secondary-button"
-                            style={{ width: "100%", fontSize: "11px", padding: "9px" }}
+                            style={{ width: "100%", fontSize: "11px", padding: "9px", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "5px" }}
                             onClick={() => handleAcceptChallenge(c.id)}
                           >
-                            Accept Challenge →
+                            <span>Accept Challenge</span>
+                            <ArrowRight size={12} />
                           </button>
                         )}
                       </div>
@@ -468,11 +500,10 @@ function Arena() {
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          fontSize: "24px",
                           flexShrink: 0,
                         }}
                       >
-                        {ach.badge_icon || "🎖️"}
+                        <Award size={24} color="#c084fc" />
                       </div>
                       <div style={{ flex: 1 }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
@@ -521,9 +552,9 @@ function Arena() {
               <h2 style={{ fontSize: "18px", margin: 0 }}>Claim Challenge XP</h2>
               <button
                 onClick={() => setCompletingChallenge(null)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 

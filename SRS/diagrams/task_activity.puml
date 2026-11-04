@@ -1,0 +1,39 @@
+@startuml task_activity
+skinparam dpi 300
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 13
+skinparam activityFontSize 13
+skinparam arrowFontSize 12
+skinparam roundCorner 8
+
+start
+
+:Student creates or selects Task;
+note right: Initial Status: **Planned**
+
+:Student begins technical work;
+note right: Status transitions to: **In Progress**
+
+:Student submits completion proof\n(PR number, commit hash, description);
+note right: Status transitions to: **Verification Pending**
+
+:Heuristic Engine scores evidence\n(Deterministic confidence: 0.20 - 0.98);
+
+:Teacher inspects evidence & score;
+
+if (Teacher decision?) then (Approve)
+  :Status transitions to: **Completed**;
+  :System awards XP to student;
+  :System logs idempotent contribution entry;
+  :Project progress percentage updates;
+  stop
+else (Reject)
+  :Teacher attaches revision feedback;
+  :Status returns to: **In Progress**;
+  :Student revises code and resubmits;
+  stop
+endif
+
+@enduml

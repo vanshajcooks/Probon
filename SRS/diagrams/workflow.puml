@@ -1,0 +1,27 @@
+@startuml workflow
+skinparam dpi 300
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 13
+skinparam roundCorner 10
+
+rectangle "Student Developer" as Student
+rectangle "Class & Team Workspace" as Class
+rectangle "Project Tasks\n(Planned / In Progress)" as Tasks
+rectangle "Evidence Submission\n& Rule-Based Scorer" as Evidence
+rectangle "Teacher / Instructor\n(Verification Authority)" as Teacher
+rectangle "Contribution Ledger\n& Student XP" as Ledger
+cloud "GitHub API\n(Commits & PRs)" as GitHub
+
+Student -right-> Class : enrolls via code
+Class -down-> Tasks : organizes work
+Student -down-> Tasks : updates progress
+Tasks -right-> Evidence : submits completion proof
+GitHub -down-> Evidence : syncs repo telemetry
+Evidence -down-> Teacher : presents confidence score
+Teacher -left-> Tasks : approves or rejects
+Teacher -down-> Ledger : confirms completion
+Ledger -left-> Student : awards verified XP
+
+@enduml

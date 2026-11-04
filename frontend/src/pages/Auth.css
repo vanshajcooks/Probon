@@ -462,7 +462,7 @@
 /*
    Register uses the exact same structure.
    This gives both authentication pages
-   a consistent ProjectHub design.
+   a consistent ProjNaN design.
 */
 
 .auth-page.register-page .auth-message {

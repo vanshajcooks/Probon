@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Compass, Search } from "lucide-react";
 import Sidebar from "../components/sidebar";
 import Projectcard from "../components/projectcard";
 import { api } from "../api/client";
@@ -43,7 +44,7 @@ function Explore() {
         <header className="dashboard-topbar">
           <div className="breadcrumb">
             <span style={{ cursor: "pointer" }} onClick={() => navigate("/dashboard")}>
-              ProjectHub
+              ProjNaN
             </span>
             <span>›</span>
             <span>Explore Projects</span>
@@ -54,8 +55,9 @@ function Explore() {
           <section className="welcome-section">
             <div>
               <div className="welcome-label">DISCOVER & COLLABORATE</div>
-              <h1>
-                Explore Projects <span>◇</span>
+              <h1 style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span>Explore Projects</span>
+                <Compass size={22} color="#a78bfa" />
               </h1>
               <p className="welcome-description">
                 Discover active class capstones, open source initiatives, and developer teams.
@@ -64,7 +66,12 @@ function Explore() {
           </section>
 
           {/* SEARCH BAR */}
-          <div style={{ marginBottom: "28px", maxWidth: "500px" }}>
+          <div style={{ marginBottom: "28px", maxWidth: "500px", position: "relative" }}>
+            <Search
+              size={16}
+              color="#71717a"
+              style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)" }}
+            />
             <input
               type="text"
               placeholder="Search by project name or technology..."
@@ -73,7 +80,7 @@ function Explore() {
               style={{
                 width: "100%",
                 height: "44px",
-                padding: "0 14px",
+                padding: "0 14px 0 38px",
                 borderRadius: "8px",
                 background: "#0d0e13",
                 border: "1px solid #252832",

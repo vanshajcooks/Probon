@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../api/client";
+import { Sparkles, ArrowRight, ArrowLeft, X } from "lucide-react";
 import "./Auth.css";
 
 function Login() {
@@ -87,13 +88,13 @@ function Login() {
       <div className="auth-left">
 
         <Link to="/" className="logo">
-          Project<span>Hub</span>
+          Proj<span>NaN</span>
         </Link>
 
         <div className="auth-message">
 
-          <div className="hero-badge">
-            👋 Welcome back
+          <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+            <Sparkles size={13} color="#a78bfa" /> Welcome back
           </div>
 
           <h1>
@@ -118,7 +119,7 @@ function Login() {
           <h2>Welcome back</h2>
 
           <p className="auth-subtitle">
-            Sign in to your ProjectHub account
+            Sign in to your ProjNaN account
           </p>
 
           <form onSubmit={handleLogin}>
@@ -178,8 +179,9 @@ function Login() {
               type="submit"
               className="auth-button"
               disabled={loading}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }}
             >
-              {loading ? "Signing in..." : "Sign In →"}
+              {loading ? "Signing in..." : <>Sign In <ArrowRight size={15} /></>}
             </button>
 
           </form>
@@ -189,7 +191,7 @@ function Login() {
           </div>
 
           <button className="github-button">
-            <span>◉</span>
+            <span>●</span>
             Continue with GitHub
           </button>
 
@@ -229,9 +231,9 @@ function Login() {
               </h2>
               <button
                 onClick={() => setShowForgotModal(false)}
-                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", fontSize: "18px" }}
+                style={{ background: "none", border: "none", color: "#858995", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }}
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
 
@@ -310,9 +312,9 @@ function Login() {
                     type="button"
                     onClick={() => setResetStep(1)}
                     className="secondary-button"
-                    style={{ flex: 1 }}
+                    style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}
                   >
-                    ← Back
+                    <ArrowLeft size={14} /> Back
                   </button>
                   <button
                     type="submit"

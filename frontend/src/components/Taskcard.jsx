@@ -1,3 +1,5 @@
+import { Check, X, ArrowRight, Sparkles } from "lucide-react";
+
 function Taskcard({ task, onStatusChange, onSubmitEvidence, onConfirmVerification, isTeacher = false }) {
   const getPriorityColor = (priority) => {
     switch (priority) {
@@ -109,7 +111,8 @@ function Taskcard({ task, onStatusChange, onSubmitEvidence, onConfirmVerificatio
             color: "#a1a1aa",
           }}
         >
-          <strong style={{ color: "#a78bfa", display: "block", marginBottom: "3px" }}>
+          <strong style={{ color: "#a78bfa", display: "flex", alignItems: "center", gap: "5px", marginBottom: "3px" }}>
+            <Sparkles size={12} />
             Submitted Evidence:
           </strong>
           <div style={{ marginBottom: "6px" }}>{task.completion_evidence}</div>
@@ -182,9 +185,10 @@ function Taskcard({ task, onStatusChange, onSubmitEvidence, onConfirmVerificatio
             <button
               onClick={() => onStatusChange(task.id, "In Progress")}
               className="secondary-button"
-              style={{ padding: "5px 9px", fontSize: "9px" }}
+              style={{ padding: "5px 9px", fontSize: "9px", display: "inline-flex", alignItems: "center", gap: "4px" }}
             >
-              Start Task →
+              <span>Start Task</span>
+              <ArrowRight size={11} />
             </button>
           )}
 
@@ -205,25 +209,28 @@ function Taskcard({ task, onStatusChange, onSubmitEvidence, onConfirmVerificatio
                   <button
                     onClick={() => onConfirmVerification(task.id, true)}
                     className="primary-button"
-                    style={{ padding: "5px 9px", fontSize: "9px", background: "#16a34a" }}
+                    style={{ padding: "5px 9px", fontSize: "9px", background: "#16a34a", display: "inline-flex", alignItems: "center", gap: "4px" }}
                   >
-                    Confirm ✓
+                    <span>Confirm</span>
+                    <Check size={11} />
                   </button>
                   <button
                     onClick={() => onConfirmVerification(task.id, false)}
                     className="secondary-button"
-                    style={{ padding: "5px 9px", fontSize: "9px", color: "#f87171" }}
+                    style={{ padding: "5px 9px", fontSize: "9px", color: "#f87171", display: "inline-flex", alignItems: "center", gap: "4px" }}
                   >
-                    Reject ✕
+                    <span>Reject</span>
+                    <X size={11} />
                   </button>
                 </>
               ) : onStatusChange ? (
                 <button
                   onClick={() => onStatusChange(task.id, "Completed")}
                   className="primary-button"
-                  style={{ padding: "5px 9px", fontSize: "9px", background: "#16a34a" }}
+                  style={{ padding: "5px 9px", fontSize: "9px", background: "#16a34a", display: "inline-flex", alignItems: "center", gap: "4px" }}
                 >
-                  Mark Completed ✓
+                  <span>Mark Completed</span>
+                  <Check size={11} />
                 </button>
               ) : null}
             </>

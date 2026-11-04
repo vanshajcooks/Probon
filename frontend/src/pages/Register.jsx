@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Rocket, Check, Circle, ArrowRight } from "lucide-react";
 import "./Auth.css";
 
 function Register() {
@@ -74,12 +75,12 @@ function Register() {
     <div className="auth-page">
       <div className="auth-left">
         <Link to="/" className="logo">
-          Project<span>Hub</span>
+          Proj<span>NaN</span>
         </Link>
 
         <div className="auth-message">
-          <div className="hero-badge">
-            🚀 Start building
+          <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+            <Rocket size={13} color="#a78bfa" /> Start building
           </div>
 
           <h1>
@@ -100,7 +101,7 @@ function Register() {
           <h2>Create your account</h2>
 
           <p className="auth-subtitle">
-            Join the ProjectHub developer community
+            Join the ProjNaN developer community
           </p>
 
           <form onSubmit={handleRegister}>
@@ -168,17 +169,17 @@ function Register() {
                   fontSize: "11px",
                 }}
               >
-                <div style={{ color: hasMinLen ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "5px" }}>
-                  <span>{hasMinLen ? "✓" : "○"}</span> 8+ characters
+                <div style={{ color: hasMinLen ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "6px" }}>
+                  {hasMinLen ? <Check size={12} color="#4ade80" /> : <Circle size={10} color="#71717a" />} 8+ characters
                 </div>
-                <div style={{ color: hasUpper && hasLower ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "5px" }}>
-                  <span>{hasUpper && hasLower ? "✓" : "○"}</span> Upper & lowercase
+                <div style={{ color: hasUpper && hasLower ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "6px" }}>
+                  {hasUpper && hasLower ? <Check size={12} color="#4ade80" /> : <Circle size={10} color="#71717a" />} Upper & lowercase
                 </div>
-                <div style={{ color: hasNumber ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "5px" }}>
-                  <span>{hasNumber ? "✓" : "○"}</span> At least 1 number
+                <div style={{ color: hasNumber ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "6px" }}>
+                  {hasNumber ? <Check size={12} color="#4ade80" /> : <Circle size={10} color="#71717a" />} At least 1 number
                 </div>
-                <div style={{ color: hasSpecial ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "5px" }}>
-                  <span>{hasSpecial ? "✓" : "○"}</span> 1 special character
+                <div style={{ color: hasSpecial ? "#4ade80" : "#71717a", display: "flex", alignItems: "center", gap: "6px" }}>
+                  {hasSpecial ? <Check size={12} color="#4ade80" /> : <Circle size={10} color="#71717a" />} 1 special character
                 </div>
               </div>
             )}
@@ -224,8 +225,9 @@ function Register() {
               type="submit"
               className="auth-button"
               disabled={loading}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }}
             >
-              {loading ? "Creating account..." : "Create Account →"}
+              {loading ? "Creating account..." : <>Create Account <ArrowRight size={15} /></>}
             </button>
           </form>
 
